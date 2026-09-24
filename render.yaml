@@ -1,0 +1,39 @@
+# Render Blueprint: API on the free plan (Docker). The database is Neon (Render's free Postgres expires after 30 days).
+# Secrets are never stored here: Render asks for the sync:false values when the Blueprint is created.
+services:
+  - name: contabilidad-api
+    type: web
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /actuator/health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: DB_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_POOL_SIZE
+        value: "3"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: INTEGRATION_HMAC_SECRET
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DEMO_DATA
+        value: "true"
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: PUBLIC_API_DOCS
+        value: "true"
