@@ -12,11 +12,13 @@ Motor de contabilidad por partida doble para PYMES ecuatorianas: plan de cuentas
 
 **Demo en vivo:** se publica en Render + Neon siguiendo [docs/despliegue.md](docs/despliegue.md) · **Usuario de prueba:** `demo@demo.com` (rol lector, sin permisos de escritura; su contraseña es la que se configure en `DEMO_PASSWORD`). El plan gratuito de Render se duerme a los 15 min: la primera carga tarda ~1 minuto.
 
-![Estado de situación financiera](docs/img/balance-sheet.png)
+![Recorrido por el visor: balance de comprobación, estados financieros, libros y Swagger](docs/img/demo.gif)
 
-| Balance de comprobación | Estado de resultados | Libro mayor |
+| Estado de situación financiera | Estado de resultados | Balance de comprobación |
 |---|---|---|
-| ![Balance de comprobación](docs/img/trial-balance.png) | ![Estado de resultados](docs/img/income-statement.png) | ![Libro mayor](docs/img/ledger.png) |
+| ![Estado de situación financiera](docs/img/balance-sheet.png) | ![Estado de resultados](docs/img/income-statement.png) | ![Balance de comprobación](docs/img/trial-balance.png) |
+| **Libro diario** | **Libro mayor** | **API (Swagger UI)** |
+| ![Libro diario](docs/img/journal.png) | ![Libro mayor](docs/img/ledger.png) | ![Swagger UI](docs/img/swagger.png) |
 
 ## Problema que resuelve
 
