@@ -92,7 +92,8 @@ public final class IncomeStatementBuilder {
         BigDecimal total = tree.sumOfDetails(node -> node.isUnder(prefix));
         int indent = prefixLevel - 2;
         lines.add(new StatementLine(Kind.HEADER, prefix, label, indent, null));
-        lines.addAll(tree.detailLines(prefix, prefixLevel, maxLevel));
+        // Always show at least one level below the block, whatever the requested depth.
+        lines.addAll(tree.detailLines(prefix, prefixLevel, Math.max(prefixLevel + 1, maxLevel)));
         lines.add(new StatementLine(Kind.SUBTOTAL, prefix, "TOTAL " + label, indent, total));
         return total;
     }
