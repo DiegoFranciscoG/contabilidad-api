@@ -12,12 +12,16 @@ import java.util.List;
 
 /**
  * Manual entry. {@code type} accepts STANDARD (default) or OPENING; closing and reversal entries have their own
- * operations. With {@code post = true} the entry is saved and posted in one step.
+ * operations. With {@code post = true} the entry is saved and posted in one step; omitted means draft.
  */
 public record JournalEntryRequest(
         @NotNull LocalDate date,
         @NotBlank @Size(max = 500) String description,
         EntryType type,
         @NotEmpty @Size(min = 2, max = 500) List<@Valid @NotNull JournalLineRequest> lines,
-        boolean post) {
+        Boolean post) {
+
+    public boolean shouldPost() {
+        return Boolean.TRUE.equals(post);
+    }
 }

@@ -17,6 +17,7 @@ build/
 *.class
 *.log
 hs_err_pid*
+.jqwik-database
 # ---- Node / Angular / React
 node_modules/
 dist/

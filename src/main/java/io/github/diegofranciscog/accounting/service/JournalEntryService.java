@@ -70,7 +70,7 @@ public class JournalEntryService {
         FiscalPeriod period = periodService.openPeriodFor(request.date());
         EntryHeader header = EntryHeader.manual(period, request.date(), request.description(), type);
         JournalEntry entry = entries.saveAndFlush(JournalEntry.draft(header, resolve(request.lines()), user, clock.instant()));
-        if (request.post()) {
+        if (request.shouldPost()) {
             postEntry(entry);
         }
         return mapper.toResponse(entry, null);
@@ -83,7 +83,7 @@ public class JournalEntryService {
         FiscalPeriod period = periodService.openPeriodFor(request.date());
         entry.update(period, request.date(), request.description(), resolve(request.lines()));
         entries.saveAndFlush(entry);
-        if (request.post()) {
+        if (request.shouldPost()) {
             postEntry(entry);
         }
         return mapper.toResponse(entry, null);
