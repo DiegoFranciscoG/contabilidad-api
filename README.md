@@ -174,6 +174,7 @@ Render (API, Docker, plan free) + Neon (PostgreSQL free). Guía paso a paso y l�
 - **Subida de CSV**: extensión, nombre, tipo, tamaño (1 MB), UTF-8 estricto y máximo 5 000 filas antes de procesar.
 - **Errores** RFC 9457 sin stack traces ni SQL; Actuator expone solo `health`.
 - **LOPDP**: los eventos no traen identificación de clientes ni empleados (solo totales); la demo usa datos ficticios.
+- **Dependencias** revisadas contra la base OSV antes de publicar: Tomcat embebido fijado en 11.0.26 porque la 11.0.24 de Spring Boot 4.1.1 tiene CVE-2026-65905, CVE-2026-65182 y CVE-2026-68525. Dependabot vigila Maven, Docker y Actions.
 - **Docker** multi-stage, imágenes con versión fija, usuario no root, sistema de archivos de solo lectura y healthcheck. **CI** con permisos mínimos, acciones fijadas por SHA y gitleaks.
 
 ## Decisiones técnicas
