@@ -1,0 +1,106 @@
+### Colección de ejemplos (REST Client de VS Code o cliente HTTP de IntelliJ)
+### Define las variables en tu entorno local; no escribas contraseñas reales en este archivo.
+@base = http://localhost:8080
+@email = demo@demo.com
+@password = {{$dotenv DEMO_PASSWORD}}
+
+### 1. Login → copia accessToken en @token (dura 15 minutos)
+# @name login
+POST {{base}}/api/v1/auth/login
+Content-Type: application/json
+
+{"email": "{{email}}", "password": "{{password}}"}
+
+###
+@token = {{login.response.body.accessToken}}
+
+### 2. Plan de cuentas
+GET {{base}}/api/v1/accounts
+Authorization: Bearer {{token}}
+
+### 3. Periodos del año
+GET {{base}}/api/v1/fiscal-periods?year=2026
+Authorization: Bearer {{token}}
+
+### 4. Abrir un ejercicio (ADMIN)
+POST {{base}}/api/v1/fiscal-years/2027/periods
+Authorization: Bearer {{token}}
+
+### 5. Crear y contabilizar un asiento (ADMIN o ACCOUNTANT): debe = haber
+POST {{base}}/api/v1/journal-entries
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "date": "2026-09-24",
+  "description": "Venta al contado con IVA 15 %",
+  "post": true,
+  "lines": [
+    {"accountCode": "1010101", "debit": 115.00},
+    {"accountCode": "4101", "credit": 100.00, "costCenterCode": "VEN"},
+    {"accountCode": "201070101", "credit": 15.00}
+  ]
+}
+
+### 6. Asiento descuadrado → 422 "El asiento no cuadra"
+POST {{base}}/api/v1/journal-entries
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"date": "2026-09-24", "description": "Descuadrado", "post": true,
+ "lines": [{"accountCode": "1010101", "debit": 100.00}, {"accountCode": "4101", "credit": 99.00}]}
+
+### 7. Reversar un asiento contabilizado (corrección de periodo cerrado)
+POST {{base}}/api/v1/journal-entries/1/reverse
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"date": "2026-09-24", "reason": "Error en la cuenta"}
+
+### 8. Balance de comprobación (JSON / XLSX / PDF)
+GET {{base}}/api/v1/reports/trial-balance?year=2026&fromMonth=1&toMonth=9
+Authorization: Bearer {{token}}
+
+###
+GET {{base}}/api/v1/reports/trial-balance?year=2026&format=XLSX
+Authorization: Bearer {{token}}
+
+### 9. Estado de situación financiera al cierre de septiembre
+GET {{base}}/api/v1/reports/balance-sheet?year=2026&month=9&level=3
+Authorization: Bearer {{token}}
+
+### 10. Estado de resultados por centro de costo
+GET {{base}}/api/v1/reports/income-statement?year=2026&fromMonth=1&toMonth=9&costCenter=ADM&format=PDF
+Authorization: Bearer {{token}}
+
+### 11. Libro diario y libro mayor
+GET {{base}}/api/v1/reports/journal?from=2026-01-01&to=2026-01-31
+Authorization: Bearer {{token}}
+
+###
+GET {{base}}/api/v1/reports/ledger?account=1010103&from=2026-01-01&to=2026-09-30
+Authorization: Bearer {{token}}
+
+### 12. Importar plan de cuentas desde CSV (ADMIN)
+POST {{base}}/api/v1/accounts/import
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=limite
+
+--limite
+Content-Disposition: form-data; name="file"; filename="plan.csv"
+Content-Type: text/csv
+
+< ./plan-cuentas-ejemplo.csv
+--limite--
+
+### 13. Cierre del ejercicio (ADMIN): salda ingresos y gastos contra 30701/30702
+POST {{base}}/api/v1/fiscal-years/2026/closing-entry
+Authorization: Bearer {{token}}
+
+### 14. Evento de facturador-sri (firma HMAC): genera la firma con docs/firmar-evento.sh
+POST {{base}}/api/v1/integrations/invoices
+Content-Type: application/json
+X-Timestamp: {{timestamp}}
+X-Signature: {{signature}}
+
+{"invoiceId":"001-001-000000321","issueDate":"2026-09-24","kind":"GOODS","subtotal":100.00,"vat":15.00,"total":115.00}
