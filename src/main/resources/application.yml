@@ -23,6 +23,10 @@ spring:
       max-request-size: 1MB
   jackson:
     default-property-inclusion: non_null
+  data:
+    web:
+      pageable:
+        max-page-size: 100
 
 server:
   port: ${PORT:8080}
