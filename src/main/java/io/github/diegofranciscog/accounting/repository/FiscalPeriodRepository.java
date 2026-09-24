@@ -31,9 +31,8 @@ public interface FiscalPeriodRepository extends JpaRepository<FiscalPeriod, Long
 
     @Query("""
             select count(p) > 0 from FiscalPeriod p
-            where p.status = :status
-              and (p.year < :year or (p.year = :year and p.month < :month))
+            where p.status = :status and p.year = :year and p.month < :month
             """)
-    boolean existsEarlierWithStatus(@Param("year") short year, @Param("month") short month,
+    boolean existsEarlierInYearWithStatus(@Param("year") short year, @Param("month") short month,
                                     @Param("status") PeriodStatus status);
 }
