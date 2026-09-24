@@ -10,7 +10,7 @@ RUN mvn -B -ntp -DskipTests package \
     && java -Djarmode=tools -jar target/contabilidad-api-1.0.0.jar extract --layers --destination extracted
 
 # ---- Runtime: JRE only, non-root user, healthcheck ----
-FROM eclipse-temurin:25.0.4_7-jre-alpine-3.24
+FROM eclipse-temurin:26-jre-alpine-3.24
 RUN addgroup -S app && adduser -S -G app -H -s /sbin/nologin app
 WORKDIR /app
 COPY --from=build --chown=app:app /workspace/extracted/dependencies/ ./
