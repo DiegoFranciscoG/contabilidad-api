@@ -200,7 +200,7 @@ Render (API, Docker, plan free) + Neon (PostgreSQL free). Guía paso a paso y l�
 ## Fuentes de datos y licencias
 
 - Catálogo de cuentas e instructivo NIIF — Superintendencia de Compañías, Valores y Seguros (información pública) — <https://appscvsmovil.supercias.gob.ec/guiasUsuarios/images/guias/info_fin/otros/PLAN%20DE%20CUENTAS.pdf>
-- NIIF para las PYMES, módulos de formación — IFRS Foundation (citado, no reproducido) — <https://www.ifrs.org/supporting-implementation/supporting-materials-for-the-ifrs-for-smes/>
+- NIIF para las PYMES, módulos de formación — IFRS Foundation (citado, no reproducido) — <https://www.ifrs.org/issued-standards/ifrs-for-smes/>
 - LORTI arts. 19–21 — Servicio de Rentas Internas (norma pública) — <https://www.sri.gob.ec>
 - Datos demo: empresa ficticia "Comercial Andina Demo", sin datos personales reales.
 - Lista completa con fechas de consulta: [docs/investigacion.md](docs/investigacion.md).
