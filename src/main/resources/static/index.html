@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contabilidad API · Visor</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="app.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+    <div class="brand">
+        <img src="favicon.svg" alt="" width="28" height="28">
+        <div>
+            <strong>Contabilidad API</strong>
+            <span class="muted">Motor de partida doble · NIIF para las PYMES · Supercias</span>
+        </div>
+    </div>
+    <nav class="toplinks">
+        <a href="swagger-ui.html">API (Swagger)</a>
+        <span id="session" class="session" hidden>
+            <span id="session-user"></span>
+            <button id="logout" type="button" class="ghost">Salir</button>
+        </span>
+    </nav>
+</header>
+
+<main>
+    <section id="login-view" class="card narrow">
+        <h1>Iniciar sesión</h1>
+        <p class="muted">Usa el usuario de demostración indicado en el README (rol lector).</p>
+        <form id="login-form" autocomplete="on">
+            <label>Correo <input id="email" type="email" required maxlength="254" autocomplete="username"></label>
+            <label>Contraseña <input id="password" type="password" required maxlength="128" autocomplete="current-password"></label>
+            <button type="submit">Entrar</button>
+            <p id="login-error" class="error" role="alert"></p>
+        </form>
+    </section>
+
+    <section id="app-view" hidden>
+        <div class="card controls">
+            <div class="tabs" role="tablist">
+                <button type="button" role="tab" data-report="trial-balance" aria-selected="true">Balance de comprobación</button>
+                <button type="button" role="tab" data-report="balance-sheet">Situación financiera</button>
+                <button type="button" role="tab" data-report="income-statement">Resultados</button>
+                <button type="button" role="tab" data-report="journal">Libro diario</button>
+                <button type="button" role="tab" data-report="ledger">Libro mayor</button>
+            </div>
+            <form id="filters" class="filters">
+                <label data-for="year">Año <input id="year" type="number" min="2000" max="2100" required></label>
+                <label data-for="fromMonth">Desde mes <input id="fromMonth" type="number" min="1" max="12" value="1"></label>
+                <label data-for="toMonth">Hasta mes <input id="toMonth" type="number" min="1" max="12" value="12"></label>
+                <label data-for="month">Mes <input id="month" type="number" min="1" max="12" value="12"></label>
+                <label data-for="costCenter">Centro de costo <input id="costCenter" type="text" maxlength="20" placeholder="opcional"></label>
+                <label data-for="account">Cuenta <input id="account" type="text" maxlength="20" value="1010103"></label>
+                <label data-for="from">Desde <input id="from" type="date"></label>
+                <label data-for="to">Hasta <input id="to" type="date"></label>
+                <div class="actions">
+                    <button type="submit">Consultar</button>
+                    <button type="button" id="download-xlsx" class="ghost">Excel</button>
+                    <button type="button" id="download-pdf" class="ghost">PDF</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="report-head">
+                <div>
+                    <h2 id="report-title">Balance de comprobación</h2>
+                    <p id="report-subtitle" class="muted"></p>
+                </div>
+                <span id="report-status" class="badge" hidden></span>
+            </div>
+            <div id="summary" class="summary"></div>
+            <div class="table-wrap">
+                <table id="report-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p id="report-error" class="error" role="alert"></p>
+        </div>
+    </section>
+</main>
+
+<footer class="muted">
+    Datos ficticios de demostración · Valores en USD · Código bajo licencia MIT
+</footer>
+</body>
+</html>
