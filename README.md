@@ -207,4 +207,4 @@ Render (API, Docker, plan free) + Neon (PostgreSQL free). Guía paso a paso y l�
 
 ## Autor
 
-**Diego Francisco Granda Zhingre** · [GitHub](https://github.com/DiegoFranciscoG) · LinkedIn (enlace pendiente)
+**Diego Francisco Granda Zhingre** · [GitHub](https://github.com/DiegoFranciscoG) · [LinkedIn](https://www.linkedin.com/in/diego-francisco-g-61b793254/) · [Portafolio](https://diegofranciscog.github.io/)
