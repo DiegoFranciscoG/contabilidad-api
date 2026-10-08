@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Build: compiles the jar and splits it into layers (tests run in CI, not here) ----
-FROM maven:3.9.16-eclipse-temurin-25-alpine AS build
+FROM maven:3.9-eclipse-temurin-26-alpine AS build
 WORKDIR /workspace
 COPY pom.xml .
 RUN mvn -B -ntp dependency:go-offline
