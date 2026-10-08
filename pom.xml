@@ -31,7 +31,7 @@
         <poi.version>5.5.1</poi.version>
         <openpdf.version>3.0.5</openpdf.version>
         <commons-csv.version>1.14.1</commons-csv.version>
-        <bucket4j.version>8.20.0</bucket4j.version>
+        <bucket4j.version>8.21.0</bucket4j.version>
         <jqwik.version>1.10.1</jqwik.version>
         <jacoco.version>0.8.15</jacoco.version>
     </properties>
