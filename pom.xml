@@ -27,7 +27,7 @@
         <java.version>25</java.version>
         <!-- Overrides Boot 4.1.1's Tomcat 11.0.24: CVE-2026-65905, CVE-2026-65182, CVE-2026-68525 fixed in 11.0.25+. -->
         <tomcat.version>11.0.26</tomcat.version>
-        <springdoc.version>3.1.1</springdoc.version>
+        <springdoc.version>3.2.0</springdoc.version>
         <poi.version>5.5.1</poi.version>
         <openpdf.version>3.0.5</openpdf.version>
         <commons-csv.version>1.14.1</commons-csv.version>
